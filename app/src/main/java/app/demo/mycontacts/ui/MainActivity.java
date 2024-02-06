@@ -45,6 +45,7 @@ protected void onCreate(Bundle savedInstanceState){
     contactViewModel.getAllContacts().observe(this, contacts -> {
         // Update the UI with the new list of contacts
         contactAdapter.setContactList(contacts);
+        recyclerView.scrollToPosition(0);
     });
 
 
@@ -71,7 +72,8 @@ public void onRequestPermissionsResult(int requestCode, @NonNull String[] permis
 // This part should be implemented based on your requirements
 // For example, you can use ContentResolver to fetch contacts from the device
 private void loadPhoneContacts(){
-    /*List<Contact> contactList = new ArrayList<>();
+    contactViewModel.setContactsNotExist();
+    List<Contact> contactList = new ArrayList<>();
     ContentResolver contentResolver = getContentResolver();
     Cursor cursor = contentResolver.query(CommonDataKinds.Phone.CONTENT_URI, null, null, null, CommonDataKinds.Phone.DISPLAY_NAME);
     if (cursor != null && cursor.getCount() > 0) {
@@ -91,10 +93,10 @@ private void loadPhoneContacts(){
             }
         }
     }
-    */
-    contactViewModel.setContactsNotExist();
-    contactViewModel.insertContact(new Contact("1","somaye", "09051591030", true));
-    contactViewModel.insertContact(new Contact("2","ramin", "09124653573", true));
+
+
+   // contactViewModel.insertContact(new Contact("1","somaye", "09051591030", true));
+    //contactViewModel.insertContact(new Contact("2","ramin", "09124653573", true));
   //  contactViewModel.insertContact(new Contact("3","zahra", "09391032366", true));
 
     contactViewModel.removeDeletedContacts();
@@ -102,6 +104,8 @@ private void loadPhoneContacts(){
 
 @Override
 public void onItemClick(Contact contact, int position){
+    String tmp =  "id: " + contact.getId() + ", name:" + contact.getName();
+    Toast.makeText(this, tmp, Toast.LENGTH_SHORT).show();
     Log.d("somaye2020", "id: " + contact.getId() + ", name:" + contact.getName());
 }
 }
