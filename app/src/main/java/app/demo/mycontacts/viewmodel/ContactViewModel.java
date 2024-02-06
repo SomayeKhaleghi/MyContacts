@@ -21,7 +21,12 @@ public ContactViewModel(@NonNull Application application){
     contactManager = new ContactManager(contactRepository);
 }
 
-public void updateContactsFromDevice(List<Contact> deviceContacts) {
+public void fetchUniqueContacts() {
+    List<Contact> uniqueContacts = contactRepository.getUniqueContacts();
+    updateContactsFromDevice(uniqueContacts);
+}
+
+private void updateContactsFromDevice(List<Contact> deviceContacts) {
     contactManager.updateHashMap(deviceContacts);
 
     if (allContacts!=null && allContacts.getValue()!=null && allContacts.getValue().size()>0)
@@ -29,6 +34,7 @@ public void updateContactsFromDevice(List<Contact> deviceContacts) {
 
     contactManager.addHashMapContactIntoDatabase();
 }
+
 
 /*public void compareAndUpdateDatabase(List<Contact> databaseContacts) {
     contactManager.compareAndUpdateDatabase(databaseContacts);

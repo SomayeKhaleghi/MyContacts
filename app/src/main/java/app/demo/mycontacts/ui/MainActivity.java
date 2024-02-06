@@ -48,17 +48,17 @@ public class MainActivity extends AppCompatActivity  implements   ContactAdapter
         recyclerView.setAdapter(contactAdapter);
         contactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
 
-        contactViewModel.getAllContacts().observe(this, contacts -> {
-            // Update the UI with the new list of contacts
-            contactAdapter.setContactList(contacts);
-            //  recyclerView.scrollToPosition(0);
-        });
-
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, PERMISSION_REQUEST_READ_CONTACTS);
         } else {
             loadPhoneContacts();
         }
+
+        contactViewModel.getAllContacts().observe(this, contacts -> {
+            // Update the UI with the new list of contacts
+            contactAdapter.setContactList(contacts);
+            //  recyclerView.scrollToPosition(0);
+        });
     }
 
     // Handle permission request result
@@ -73,9 +73,10 @@ public class MainActivity extends AppCompatActivity  implements   ContactAdapter
         }
     }
 
+    @SuppressLint("Range")
     private void loadPhoneContacts() {
         //contactViewModel.setContactsNotExist();
-        List<Contact> contactList = new ArrayList<>();
+       /*   List<Contact> contactList = new ArrayList<>();
         ContentResolver contentResolver = getContentResolver();
         Cursor cursor = contentResolver.query(CommonDataKinds.Phone.CONTENT_URI, null, null, null, CommonDataKinds.Phone.DISPLAY_NAME);
         if (cursor != null && cursor.getCount() > 0) {
@@ -85,17 +86,19 @@ public class MainActivity extends AppCompatActivity  implements   ContactAdapter
                 @SuppressLint("Range") String phoneNumber = cursor.getString(cursor.getColumnIndex(CommonDataKinds.Phone.NUMBER));
                 Contact contact = new Contact(id, name, phoneNumber, true);
                 contactList.add(contact);
-                Log.d("somaye", "id: " + contact.getId() + ", name:" + contact.getName());
+
 
             }
             cursor.close();
-            if (contactList.size() > 0) {
+
+            Log.d("somaye2020", "row count: " +contactList.size());
+          if (contactList.size() > 0) {
                 for (Contact contact : contactList) {
                     contactViewModel.insertContact(contact);
                 }
             }
         }
-
+*/
         //contactViewModel.insertContact(new Contact("1","somaye", "09051591030", true));
         //contactViewModel.insertContact(new Contact("2","ramin", "09124653573", true));
         //contactViewModel.insertContact(new Contact("3","zahra", "09391032366", true));
@@ -107,9 +110,12 @@ public class MainActivity extends AppCompatActivity  implements   ContactAdapter
 
     }
     */
-        contactViewModel.updateContactsFromDevice(contactList);
+       // contactViewModel.updateContactsFromDevice(contactList);
         //contactViewModel.insertContactList(contactList);
         //contactViewModel.removeDeletedContacts();
+
+
+     contactViewModel.fetchUniqueContacts();
     }
 
     @Override

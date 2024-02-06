@@ -1,23 +1,31 @@
 package app.demo.mycontacts.repository;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 import java.util.List;
 import app.demo.mycontacts.dao.ContactDao;
 import app.demo.mycontacts.database.AppDatabase;
 import app.demo.mycontacts.model.Contact;
+import app.demo.mycontacts.model.ContactFetcher;
 
 public class ContactRepository {
 private ContactDao contactDao;
+private Context  context;
 
 public ContactRepository(Application application) {
     AppDatabase db = AppDatabase.getInstance(application);
     contactDao = db.contactDao();
+    this.context  = application.getApplicationContext();
 }
 
 public LiveData<List<Contact>> getAllContacts() {
     return contactDao.getAllContacts();
+}
+
+public List<Contact> getUniqueContacts() {
+    return ContactFetcher.fetchUniqueContacts(context);
 }
 
 public void insertContact(Contact contact) {
