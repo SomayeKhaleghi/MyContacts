@@ -1,13 +1,9 @@
 package app.demo.mycontacts.model;
 
-<<<<<<< HEAD
-=======
 import androidx.annotation.NonNull;
->>>>>>> origin/master
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
 @Entity(tableName = "contact")
 public class Contact {
 @PrimaryKey(autoGenerate = false)

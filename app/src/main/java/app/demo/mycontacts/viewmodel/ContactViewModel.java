@@ -8,18 +8,32 @@ import java.util.List;
 import app.demo.mycontacts.model.Contact;
 import app.demo.mycontacts.repository.ContactRepository;
 public class ContactViewModel extends AndroidViewModel {
+
+private ContactManager contactManager;
 private ContactRepository contactRepository;
 private LiveData<List<Contact>> allContacts;
 
 public ContactViewModel(@NonNull Application application){
     super(application);
     contactRepository = new ContactRepository(application);
-
-    //mock data
-    //insertContact(new Contact("id","John Doe", "123-456-7890"));
-
     allContacts = contactRepository.getAllContacts();
+
+    contactManager = new ContactManager(contactRepository);
 }
+
+public void updateContactsFromDevice(List<Contact> deviceContacts) {
+    contactManager.updateHashMap(deviceContacts);
+
+    if (allContacts!=null && allContacts.getValue()!=null && allContacts.getValue().size()>0)
+        contactManager.compareAndUpdateDatabase(allContacts.getValue());
+
+    contactManager.addHashMapContactIntoDatabase();
+}
+
+/*public void compareAndUpdateDatabase(List<Contact> databaseContacts) {
+    contactManager.compareAndUpdateDatabase(databaseContacts);
+}*/
+
 public void insertContactList(@NonNull List<Contact> contactList) {
     for (Contact contact : contactList) {
         insertContact(contact);

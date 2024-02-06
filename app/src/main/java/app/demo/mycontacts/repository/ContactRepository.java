@@ -24,6 +24,10 @@ public void insertContact(Contact contact) {
     new InsertContactAsyncTask(contactDao).execute(contact);
 }
 
+public void updateContact(Contact contact) {
+    new UpdateContactAsyncTask(contactDao).execute(contact);
+}
+
 
 public void deleteContacts() {
     new DeleteContactsAsyncTask(contactDao).execute();
@@ -50,6 +54,19 @@ private static class InsertContactAsyncTask extends AsyncTask<Contact, Void, Voi
     }
 }
 
+private static class UpdateContactAsyncTask extends AsyncTask<Contact, Void, Void> {
+    private ContactDao contactDao;
+
+    private UpdateContactAsyncTask(ContactDao contactDao) {
+        this.contactDao = contactDao;
+    }
+
+    @Override
+    protected Void doInBackground(Contact... contacts) {
+        contactDao.updateContact(contacts[0]);
+        return null;
+    }
+}
 
 private static class DeleteContactsAsyncTask extends AsyncTask<Void, Void, Void> {
     private ContactDao contactDao;
@@ -80,4 +97,3 @@ private static class UpdateContactsExistanceAsyncTask extends AsyncTask<Void, Vo
     }
 }
 }
->>>>>>> origin/master

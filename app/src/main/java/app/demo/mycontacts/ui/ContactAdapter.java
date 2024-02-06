@@ -1,6 +1,7 @@
 package app.demo.mycontacts.ui;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ public int getItemCount(){
 @SuppressLint("NotifyDataSetChanged")
 public void setContactList(List<Contact> contacts){
     this.contactList = contacts;
+    Log.d("ContactAdapter", "setContactList, notifyDataSetChanged()");
     notifyDataSetChanged();
 }
 public class ContactViewHolder extends RecyclerView.ViewHolder {
