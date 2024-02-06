@@ -1,5 +1,7 @@
 package app.demo.mycontacts.ui;
 
+import static android.provider.ContactsContract.*;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -9,95 +11,101 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import app.demo.mycontacts.R;
 import app.demo.mycontacts.model.Contact;
 import app.demo.mycontacts.viewmodel.ContactViewModel;
-import app.demo.mycontacts.R;
-public class MainActivity extends AppCompatActivity {
-    private ContactViewModel contactViewModel;
-    private ContactAdapter contactAdapter;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
+public class MainActivity extends AppCompatActivity  implements   ContactAdapter.ItemEventListener {
+private ContactViewModel contactViewModel;
+private ContactAdapter contactAdapter;
+private static final int PERMISSION_REQUEST_READ_CONTACTS = 1001;
 
-        contactAdapter = new ContactAdapter(new ArrayList<>());
-        recyclerView.setAdapter(contactAdapter);
-
-        contactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
-        // Fetch contacts and insert a sample contact (you may replace it with actual logic)
-
-
-        contactViewModel.getAllContacts().observe(this, contacts -> {
-            // Update the UI with the new list of contacts
-            contactAdapter.setContactList(contacts);
-        });
+@Override
+protected void onCreate(Bundle savedInstanceState){
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    contactAdapter = new ContactAdapter(new ArrayList<>(), this);
+    RecyclerView recyclerView = findViewById(R.id.recyclerView);
+    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    recyclerView.setHasFixedSize(true);
+    recyclerView.setAdapter(contactAdapter);
+    contactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
+    contactViewModel.getAllContacts().observe(this, contacts -> {
+        // Update the UI with the new list of contacts
+        contactAdapter.setContactList(contacts);
+        recyclerView.scrollToPosition(0);
+    });
 
 
-        // Request permissions if not granted
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
-                == PackageManager.PERMISSION_GRANTED) {
-            loadPhoneContacts();
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_CONTACTS},
-                    1); // You can use any request code here
-        }
-
-
+    if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, PERMISSION_REQUEST_READ_CONTACTS);
+    } else {
+        loadPhoneContacts();
     }
+}
 
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        if (requestCode == 1 && grantResults.length > 0 &&
-                grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            loadPhoneContacts();
-        } else {
-            // Handle permission denied
-            Toast.makeText(this, "Permission denied. Unable to fetch contacts.",
-                    Toast.LENGTH_SHORT).show();
-        }
+// Handle permission request result
+@Override
+public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    if (requestCode == 1 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        loadPhoneContacts();
+    } else {
+        // Handle permission denied
+        Toast.makeText(this, "Permission denied. Unable to fetch contacts.", Toast.LENGTH_SHORT).show();
     }
+}
 
+// Fetch and insert contacts into ViewModel
+// This part should be implemented based on your requirements
+// For example, you can use ContentResolver to fetch contacts from the device
+private void loadPhoneContacts(){
+    contactViewModel.setContactsNotExist();
+    List<Contact> contactList = new ArrayList<>();
+    ContentResolver contentResolver = getContentResolver();
+    Cursor cursor = contentResolver.query(CommonDataKinds.Phone.CONTENT_URI, null, null, null, CommonDataKinds.Phone.DISPLAY_NAME);
+    if (cursor != null && cursor.getCount() > 0) {
+        while (cursor.moveToNext()) {
+            @SuppressLint("Range") String id = cursor.getString(cursor.getColumnIndex(CommonDataKinds.Phone._ID));
+            @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(CommonDataKinds.Phone.DISPLAY_NAME));
+            @SuppressLint("Range") String phoneNumber = cursor.getString(cursor.getColumnIndex(CommonDataKinds.Phone.NUMBER));
+            Contact contact = new Contact(id, name, phoneNumber, true);
+            contactList.add(contact);
+            Log.d("somaye", "id: " + contact.getId() + ", name:" + contact.getName());
 
-    private void loadPhoneContacts() {
-        Cursor cursor = getContentResolver().query(
-                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                null,
-                null,
-                null,
-                ContactsContract.Contacts.DISPLAY_NAME
-        );
-
-        List<Contact> phoneContacts = new ArrayList<>();
-
-        if (cursor != null) {
-            while (cursor.moveToNext()) {
-                String name = cursor.getString(cursor.getColumnIndex(
-                        ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-                String phoneNumber = cursor.getString(cursor.getColumnIndex(
-                        ContactsContract.CommonDataKinds.Phone.NUMBER));
-
-                phoneContacts.add(new Contact(name, phoneNumber));
+        }
+        cursor.close();
+        if (contactList.size() > 0) {
+            for (Contact contact : contactList) {
+                contactViewModel.insertContact(contact);
             }
-            cursor.close();
         }
-
-        // Insert phone contacts into the ViewModel
-        contactViewModel.insertContactList(phoneContacts);
     }
+
+
+   // contactViewModel.insertContact(new Contact("1","somaye", "09051591030", true));
+    //contactViewModel.insertContact(new Contact("2","ramin", "09124653573", true));
+  //  contactViewModel.insertContact(new Contact("3","zahra", "09391032366", true));
+
+    contactViewModel.removeDeletedContacts();
+}
+
+@Override
+public void onItemClick(Contact contact, int position){
+    String tmp =  "id: " + contact.getId() + ", name:" + contact.getName();
+    Toast.makeText(this, tmp, Toast.LENGTH_SHORT).show();
+    Log.d("somaye2020", "id: " + contact.getId() + ", name:" + contact.getName());
+}
 }
