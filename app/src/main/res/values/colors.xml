@@ -2,4 +2,26 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorPing">#009966</color>
+    <color name="colorPingRed">#FF0099</color>
+    <color name="color_fab_orange">#f97910</color>
+    <color name="color_bg_menu">#aa113676</color>
+    <color name="color_switch_fab_grey">#CDCDCD</color>
+    <color name="color_fab_grey">#4021215f</color>
+    <color name="color_secondary">#113676</color>
+    <color name="colorSelected">#113676</color>
+    <color name="colorUnselected">#FFFFFF</color>
+
+    <color name="colorPrimary">#113676</color>
+    <color name="colorPrimaryDark">#113676</color>
+    <color name="colorAccent">#113676</color>
+    <color name="colorBg">#FFFFFF</color>
+    <color name="colorText">#CDCDCD</color>
+
+    <color name="colorGreen">#2D7B2B</color>
+    <color name="colorYellow">#B9961A</color>
+    <color name="colorRed">#E20B0B</color>
+    <color name="colorBtnText">#221313</color>
+    <color name="colorBtnBg">#F4F3F3</color>
+
 </resources>

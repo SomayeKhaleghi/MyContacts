@@ -14,13 +14,29 @@ private LiveData<List<Contact>> allContacts;
 public ContactViewModel(@NonNull Application application){
     super(application);
     contactRepository = new ContactRepository(application);
+
     //mock data
-    insertContact(new Contact("John Doe", "123-456-7890"));
+    //insertContact(new Contact("id","John Doe", "123-456-7890"));
+
     allContacts = contactRepository.getAllContacts();
 }
+public void insertContactList(@NonNull List<Contact> contactList) {
+    for (Contact contact : contactList) {
+        insertContact(contact);
+    }
+}
+public void insertContact(@NonNull Contact contact){
 
-public void insertContact(Contact contact){
-    contactRepository.insertContact(contact);
+     contactRepository.insertContact(contact);
+}
+
+public void removeDeletedContacts(){
+
+    contactRepository.deleteContacts();
+}
+
+public void setContactsNotExist() {
+   contactRepository.setAllContactsNotExist();
 }
 
 public LiveData<List<Contact>> getAllContacts(){

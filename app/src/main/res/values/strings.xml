@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">MyContacts</string>
-    <string name="dbName">contactsDB</string>
+    <string name="dbName">contacts.db</string>
 </resources>
