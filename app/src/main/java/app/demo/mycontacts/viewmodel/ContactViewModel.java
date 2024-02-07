@@ -7,7 +7,6 @@ import java.util.List;
 import app.demo.mycontacts.model.Contact;
 import app.demo.mycontacts.repository.ContactRepository;
 public class ContactViewModel extends AndroidViewModel {
-
 private ContactManager contactManager;
 private ContactRepository contactRepository;
 private LiveData<List<Contact>> allContacts;
@@ -16,7 +15,6 @@ public ContactViewModel(@NonNull Application application){
     super(application);
     contactRepository = new ContactRepository(application);
     allContacts = contactRepository.getAllContacts();
-
     contactManager = new ContactManager(contactRepository);
 }
 

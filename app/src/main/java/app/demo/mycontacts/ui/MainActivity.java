@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
-
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 import app.demo.mycontacts.R;
 import app.demo.mycontacts.model.Contact;
@@ -17,7 +15,6 @@ import app.demo.mycontacts.utils.Constants;
 import app.demo.mycontacts.viewmodel.ContactViewModel;
 
 public class MainActivity extends AppCompatActivity  implements   ContactAdapter.ItemEventListener {
-
 
     private ContactViewModel contactViewModel;
 
@@ -46,8 +43,6 @@ public class MainActivity extends AppCompatActivity  implements   ContactAdapter
     }
 
     private void loadPhoneContacts() {
-
-
         contactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
 
         getSupportFragmentManager().beginTransaction()

@@ -41,7 +41,7 @@ public class ContactListFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_contact_list, container, false);
         contactAdapter = new ContactAdapter(new ArrayList<>(), (ContactAdapter.ItemEventListener) requireActivity());
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(),RecyclerView.VERTICAL, false));
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(null);
         recyclerView.setAdapter(contactAdapter);

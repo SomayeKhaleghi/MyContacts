@@ -18,11 +18,8 @@ private String name = "";
 @ColumnInfo(name = "phone_number")
 private String phoneNumber = "";
 
-
 @ColumnInfo(name = "email")
 private String email = "";
-
-
 
 public void setId(@NonNull String id){
     this.id = id;
