@@ -37,14 +37,11 @@ public void updateContact(Contact contact) {
 }
 
 
-public void deleteContacts() {
-    new DeleteContactsAsyncTask(contactDao).execute();
+public void deleteContacts(Contact contact) {
+    new DeleteContactsAsyncTask(contactDao).execute(contact);
 }
 
 
-public void setAllContactsNotExist() {
-    new UpdateContactsExistanceAsyncTask(contactDao).execute();
-}
 
 
 
@@ -76,7 +73,7 @@ private static class UpdateContactAsyncTask extends AsyncTask<Contact, Void, Voi
     }
 }
 
-private static class DeleteContactsAsyncTask extends AsyncTask<Void, Void, Void> {
+private static class DeleteContactsAsyncTask extends AsyncTask<Contact, Void, Void> {
     private ContactDao contactDao;
 
     private DeleteContactsAsyncTask(ContactDao contactDao) {
@@ -84,24 +81,10 @@ private static class DeleteContactsAsyncTask extends AsyncTask<Void, Void, Void>
     }
 
     @Override
-    protected Void doInBackground(Void... voids){
-        contactDao.removeDeletedContacts();
+    protected Void doInBackground(Contact... contacts){
+        contactDao.deleteContact(contacts[0]);
         return null;
     }
 }
 
-
-private static class UpdateContactsExistanceAsyncTask extends AsyncTask<Void, Void, Void> {
-    private ContactDao contactDao;
-
-    private UpdateContactsExistanceAsyncTask(ContactDao contactDao) {
-        this.contactDao = contactDao;
-    }
-
-    @Override
-    protected Void doInBackground(Void... voids){
-        contactDao.setAllContactsNotExist();
-        return null;
-    }
-}
 }

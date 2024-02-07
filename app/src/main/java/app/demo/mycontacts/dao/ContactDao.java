@@ -7,7 +7,6 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
-
 import java.util.List;
 
 import app.demo.mycontacts.model.Contact;
@@ -23,11 +22,6 @@ void updateContact(Contact contact);
 @Query("SELECT * FROM contact")
 LiveData<List<Contact>> getAllContacts();
 
-
-@Query("update contact set exist = 0;")
-void setAllContactsNotExist();
-
-
-@Query("delete from contact where exist = 0;")
-void removeDeletedContacts();
+@Delete
+void deleteContact(Contact contact);
 }

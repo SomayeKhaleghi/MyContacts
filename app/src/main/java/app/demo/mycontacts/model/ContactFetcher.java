@@ -5,8 +5,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract;
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -33,19 +31,13 @@ public class ContactFetcher {
                 if (uniqueContactIds.add(contactId)) {
                     @SuppressLint("Range") String contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
                     String contactPhoneNumber = getContactPhoneNumber(contentResolver, contactId);
-                    String skypeId = ""; // Implement method to retrieve Skype ID
-                    String telegramId = ""; // Implement method to retrieve Telegram ID
-                    String email = ""; // Implement method to retrieve email
                     Contact contact = new Contact(contactId, contactName, contactPhoneNumber);
                     uniqueContacts.add(contact);
-                    Log.d("somaye", "id: " +contactId + ", name:" +contactName+", phone:"+contactPhoneNumber);
                 }
             }
             cursor.close();
         }
 
-
-        Log.d("somaye2020", "row count: " +uniqueContactIds.size());
         return uniqueContacts;
     }
 

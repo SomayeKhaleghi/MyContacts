@@ -55,6 +55,6 @@ public class ContactManager {
     }
 
     private void deleteContactFromDatabase(Contact contact) {
-        contactRepository.deleteContacts();
+        contactRepository.deleteContacts(contact);
     }
 }
