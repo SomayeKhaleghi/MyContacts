@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.api.ApkVariantOutputImpl
+
 plugins {
     id("com.android.application")
 }
@@ -30,7 +32,33 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    splits {
+        abi {
+            isEnable  =   true
+            reset()
+            include ("x86", "x86_64", "armeabi-v7a", "arm64-v8a" )
+            isUniversalApk = true
+        }
+    }
 
+    val versionCodes = mapOf(
+        "armeabi-v7a" to 1,
+        "arm64-v8a" to 2,
+        "x86" to 3,
+        "x86_64" to 4
+    )
+
+    applicationVariants.all {
+        val variant = this
+        variant.outputs
+            .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
+            .forEach { output ->
+                output.outputFileName = "v2rayNG_" + variant.versionName + "_" + output.getFilter(com.android.build.OutputFile.ABI) + ".apk"
+                val newVersionCode = (versionCodes.get(output.getFilter(com.android.build.OutputFile.ABI))
+                    ?.times(1000000) ?: 100) + android.defaultConfig.versionCode!!
+                (output as ApkVariantOutputImpl).versionCodeOverride = newVersionCode
+            }
+    }
 
 }
 
