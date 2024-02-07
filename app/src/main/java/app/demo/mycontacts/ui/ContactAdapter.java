@@ -42,32 +42,20 @@ public int getItemCount(){
 @SuppressLint("NotifyDataSetChanged")
 public void setContactList(List<Contact> contacts){
     this.contactList = contacts;
-    Log.d("ContactAdapter", "setContactList, notifyDataSetChanged()");
     notifyDataSetChanged();
 }
 public class ContactViewHolder extends RecyclerView.ViewHolder {
-    TextView textViewName;
-    TextView textViewPhoneNumber;
-    TextView textViewId;
+    TextView textViewContactName;
 
     ContactViewHolder(@NonNull View itemView){
         super(itemView);
-        textViewName = itemView.findViewById(R.id.textViewName);
-        textViewPhoneNumber = itemView.findViewById(R.id.textViewPhoneNumber);
-        textViewId = itemView.findViewById(R.id.textViewId);
+        textViewContactName = itemView.findViewById(R.id.textViewContactName);
     }
 
 
     public void bindContact(final Contact contact){
-        textViewName.setText(contact.getName());
-        textViewPhoneNumber.setText(contact.getPhoneNumber());
-        textViewId.setText(contact.getId());
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-              itemEventListener.onItemClick(contact, getAdapterPosition());
-            }
-        });
+        textViewContactName.setText(contact.getName());
+        itemView.setOnClickListener(v -> itemEventListener.onItemClick(contact, getAdapterPosition()));
     }
 }
 

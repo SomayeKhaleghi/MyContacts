@@ -36,8 +36,6 @@ public class ContactManager {
                 deleteContactFromDatabase(dbContact);
             }
         }
-
-
     }
 
     public void addHashMapContactIntoDatabase() {

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ContactDetailFragment"
+        android:orientation="vertical"
+    android:layout_margin="35sp"
+        android:padding="16dp">
+
+
+    <ImageView
+        android:layout_width="64sp"
+        android:layout_height="64sp"
+        android:src="@drawable/contact"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/contact" />
+
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/shabnam_bold"
+
+            android:text="@string/name"
+            android:layout_marginTop="8sp"
+            android:layout_marginBottom="24sp"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/phone_number"
+            android:paddingStart="16sp"
+            android:paddingLeft="16sp"
+            android:paddingTop="8sp"
+            android:paddingEnd="16sp"
+            android:paddingRight="16sp"
+            android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/textViewEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16sp"
+        android:paddingLeft="16sp"
+        android:paddingTop="8sp"
+        android:paddingEnd="16sp"
+        android:paddingRight="16sp"
+        android:text="@string/email_address"
+        android:textSize="16sp" />
+
+
+</LinearLayout>
+
