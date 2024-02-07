@@ -28,6 +28,15 @@ public List<Contact> getUniqueContacts() {
     return ContactFetcher.fetchUniqueContacts(context);
 }
 
+
+
+public List<Contact> getUniqueContact(String id) {
+    return ContactFetcher.fetchUniqueContact(context, id);
+}
+
+
+
+
 public void insertContact(Contact contact) {
     new InsertContactAsyncTask(contactDao).execute(contact);
 }

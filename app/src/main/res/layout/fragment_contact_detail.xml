@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.ContactDetailFragment"
         android:orientation="vertical"
-    android:layout_margin="35sp"
-        android:padding="16dp">
+    android:layout_margin="@dimen/_32ssp"
+        android:padding="@dimen/_16ssp">
 
 
     <ImageView
-        android:layout_width="64sp"
-        android:layout_height="64sp"
+        android:layout_width="@dimen/_64ssp"
+        android:layout_height="@dimen/_64ssp"
         android:src="@drawable/contact"
         android:layout_gravity="center"
         android:scaleType="centerCrop"
@@ -27,9 +27,9 @@
             android:fontFamily="@font/shabnam_bold"
 
             android:text="@string/name"
-            android:layout_marginTop="8sp"
-            android:layout_marginBottom="24sp"
-            android:textSize="20sp"
+            android:layout_marginTop="@dimen/_8ssp"
+            android:layout_marginBottom="@dimen/_24ssp"
+            android:textSize="@dimen/_20ssp"
             android:textStyle="bold"/>
 
         <TextView
@@ -37,24 +37,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/phone_number"
-            android:paddingStart="16sp"
-            android:paddingLeft="16sp"
-            android:paddingTop="8sp"
-            android:paddingEnd="16sp"
-            android:paddingRight="16sp"
-            android:textSize="16sp"/>
+            android:paddingStart="@dimen/_16ssp"
+            android:paddingLeft="@dimen/_16ssp"
+            android:paddingTop="@dimen/_8ssp"
+            android:paddingEnd="@dimen/_16ssp"
+            android:paddingRight="@dimen/_16ssp"
+            android:textSize="@dimen/_16ssp"/>
 
     <TextView
         android:id="@+id/textViewEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="16sp"
-        android:paddingLeft="16sp"
-        android:paddingTop="8sp"
-        android:paddingEnd="16sp"
-        android:paddingRight="16sp"
+        android:paddingStart="@dimen/_16ssp"
+        android:paddingLeft="@dimen/_16ssp"
+        android:paddingTop="@dimen/_8ssp"
+        android:paddingEnd="@dimen/_16ssp"
+        android:paddingRight="@dimen/_16ssp"
         android:text="@string/email_address"
-        android:textSize="16sp" />
+        android:textSize="@dimen/_16ssp" />
 
 
 </LinearLayout>
