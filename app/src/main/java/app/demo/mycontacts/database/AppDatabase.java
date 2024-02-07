@@ -9,7 +9,7 @@ import app.demo.mycontacts.R;
 import app.demo.mycontacts.dao.ContactDao;
 import app.demo.mycontacts.model.Contact;
 
-@Database(entities = {Contact.class}, version = 8)
+@Database(entities = {Contact.class}, version = 9)
 public abstract class AppDatabase extends RoomDatabase {
 
 private static volatile AppDatabase instance;

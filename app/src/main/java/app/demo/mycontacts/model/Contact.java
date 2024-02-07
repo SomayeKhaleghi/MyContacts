@@ -16,8 +16,12 @@ private String id = "";
 private String name = "";
 
 @ColumnInfo(name = "phone_number")
-@NonNull
 private String phoneNumber = "";
+
+
+@ColumnInfo(name = "email")
+private String email = "";
+
 
 
 public void setId(@NonNull String id){
@@ -37,17 +41,27 @@ public void setPhoneNumber(@NonNull String phoneNumber){
     this.phoneNumber = phoneNumber;
 }
 
-@NonNull
+    @NonNull
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@NonNull String email) {
+        this.email = email;
+    }
+
+    @NonNull
 public String getPhoneNumber(){
     return phoneNumber;
 }
 public Contact(){
     int x = 0;
 }
-public Contact(@NonNull String id, @NonNull String name, @NonNull String phoneNumber){
+public Contact(@NonNull String id, @NonNull String name,  String phoneNumber, String email){
     this.id = id;
     this.name = name;
     this.phoneNumber = phoneNumber;
+    this.email  = email;
 }
 
 }
