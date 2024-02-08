@@ -10,7 +10,6 @@ import androidx.room.Update;
 import java.util.List;
 
 import app.demo.mycontacts.model.Contact;
-
 @Dao
 public interface ContactDao {
 @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -19,7 +18,7 @@ void insert(Contact contact);
 @Update
 void updateContact(Contact contact);
 
-@Query("SELECT * FROM contact")
+@Query("SELECT * FROM contact ORDER BY name;")
 LiveData<List<Contact>> getAllContacts();
 
 @Delete

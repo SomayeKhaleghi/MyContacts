@@ -8,8 +8,7 @@ import androidx.room.RoomDatabase;
 import app.demo.mycontacts.R;
 import app.demo.mycontacts.dao.ContactDao;
 import app.demo.mycontacts.model.Contact;
-
-@Database(entities = {Contact.class}, version = 10)
+@Database(entities = {Contact.class}, version = 13)
 public abstract class AppDatabase extends RoomDatabase {
 
 private static volatile AppDatabase instance;

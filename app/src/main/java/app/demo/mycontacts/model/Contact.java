@@ -7,33 +7,32 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "contact")
 public class Contact {
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey
     @NonNull
-    private String id = "";
+    private Integer id ;
 
     @ColumnInfo(name = "name")
     @NonNull
     private String name = "";
 
-
-    public void setId(@NonNull String id) {
+    public void setId(@NonNull Integer id) {
         this.id = id;
     }
 
-    public String getId() {
+    @NonNull
+    public Integer getId() {
         return id;
     }
 
+    @NonNull
     public String getName() {
         return name;
     }
     public void setName(@NonNull String name) {
         this.name = name;
     }
-    public Contact() {
-    }
 
-    public Contact(@NonNull String id, @NonNull String name) {
+    public Contact(@NonNull Integer id, @NonNull String name) {
         this.id = id;
         this.name = name;
     }

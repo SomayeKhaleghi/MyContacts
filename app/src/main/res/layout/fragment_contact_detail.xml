@@ -79,13 +79,11 @@
         android:id="@+id/textViewEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:gravity="center_vertical"
         android:fontFamily="@font/shabnam_regular"
         android:text="@string/email_address"
         android:textSize="@dimen/_12ssp" />
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -108,10 +106,9 @@
             android:id="@+id/textViewWhatsapp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:gravity="center_vertical"
             android:fontFamily="@font/shabnam_regular"
-            android:text="@string/email_address"
+            android:text="@string/whatsapp"
             android:textSize="@dimen/_12ssp" />
     </LinearLayout>
 
@@ -140,7 +137,7 @@
 
             android:gravity="center_vertical"
             android:fontFamily="@font/shabnam_regular"
-            android:text="@string/email_address"
+            android:text="@string/telegram"
             android:textSize="@dimen/_12ssp" />
     </LinearLayout>
 

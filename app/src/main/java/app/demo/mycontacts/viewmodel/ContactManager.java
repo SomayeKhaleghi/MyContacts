@@ -7,7 +7,7 @@ import app.demo.mycontacts.repository.ContactRepository;
 
 public class ContactManager {
     private ContactRepository contactRepository;
-    private HashMap<String, Contact> contactHashMap;
+    private HashMap<Integer, Contact> contactHashMap;
 
     public ContactManager(ContactRepository contactRepository) {
         contactHashMap = new HashMap<>();
@@ -23,7 +23,7 @@ public class ContactManager {
 
     public void compareAndUpdateDatabase(List<Contact> databaseContacts) {
         for (Contact dbContact : databaseContacts) {
-            String contactId = dbContact.getId();
+            Integer contactId = dbContact.getId();
 
             if (contactHashMap.containsKey(contactId)) {
                 Contact deviceContact = contactHashMap.get(contactId);

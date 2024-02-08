@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.Toast;
 import app.demo.mycontacts.R;
 import app.demo.mycontacts.model.Contact;
@@ -54,11 +55,13 @@ public class MainActivity extends AppCompatActivity  implements   ContactAdapter
 
     @Override
     public void onItemClick(Contact contact, int position) {
+
         ContactDetailFragment fragment = new ContactDetailFragment();
-        Bundle args = new Bundle();
-        args.putString(Constants.ID, contact.getId());
-        args.putString(Constants.NAME, contact.getName());
-        fragment.setArguments(args);
+
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.ID, contact.getId());
+        bundle.putString(Constants.NAME, contact.getName());
+        fragment.setArguments(bundle);
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)

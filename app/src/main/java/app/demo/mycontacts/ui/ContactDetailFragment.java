@@ -29,21 +29,12 @@ public class ContactDetailFragment extends Fragment {
     ContactDetailViewModel contactDetailViewModel;
 
     public ContactDetailFragment() {
-        // Required empty public constructor
-    }
-
-    public static ContactDetailFragment newInstance(String param1, String param2) {
-        ContactDetailFragment fragment = new ContactDetailFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,14 +47,14 @@ public class ContactDetailFragment extends Fragment {
         textViewWhatsapp = view.findViewById(R.id.textViewWhatsapp);
         textViewTelegram = view.findViewById(R.id.textViewTelegram);
 
-        Bundle args = getArguments();
-        if (args == null)
+        Bundle arguments = getArguments();
+        if (arguments == null || !arguments.containsKey(Constants.ID)|| !arguments.containsKey(Constants.NAME)) {
             return view;
+        }
 
-        String id = args.getString(Constants.ID);
-        String name = args.getString(Constants.NAME);
+        Integer id = arguments.getInt(Constants.ID);
+        String name = arguments.getString(Constants.NAME);
         assert name != null;
-        assert id != null;
         Contact contact = new Contact(id, name);
 
         ContactDetailViewModelFactory factory = new ContactDetailViewModelFactory(requireActivity().getApplication(), contact);

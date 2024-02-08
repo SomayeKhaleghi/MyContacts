@@ -15,12 +15,12 @@ import java.util.Set;
 public class ContactFetcher {
     public static List<Contact> fetchUniqueContacts(Context context) {
         List<Contact> uniqueContacts = new ArrayList<>();
-        Set<String> uniqueContactIds = new HashSet<>();
+        Set<Integer> uniqueContactIds = new HashSet<>();
         ContentResolver contentResolver = context.getContentResolver();
         Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
         if (cursor != null && cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
-                @SuppressLint("Range") String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+                @SuppressLint("Range") Integer contactId = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts._ID));
                 if (uniqueContactIds.add(contactId)) {
                     @SuppressLint("Range") String contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
@@ -40,7 +40,7 @@ public class ContactFetcher {
         Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
         if (cursor != null && cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
-                @SuppressLint("Range") String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+                @SuppressLint("Range") Integer contactId = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts._ID));
                 if (!contact.getId().equals(contactId))
                     continue;
 
@@ -61,18 +61,18 @@ public class ContactFetcher {
     }
 
     @SuppressLint("Range")
-    private static String getContactPhoneNumber(ContentResolver contentResolver, String contactId) {
+    private static String getContactPhoneNumber(ContentResolver contentResolver, Integer contactId) {
         return getContactInfo(contentResolver, ContactsContract.CommonDataKinds.Phone.CONTENT_URI, ContactsContract.CommonDataKinds.Phone.CONTACT_ID, contactId, ContactsContract.CommonDataKinds.Phone.NUMBER);
     }
 
-    private static String getContactEmail(ContentResolver contentResolver, String contactId) {
+    private static String getContactEmail(ContentResolver contentResolver, Integer contactId) {
         return getContactInfo(contentResolver, ContactsContract.CommonDataKinds.Email.CONTENT_URI, ContactsContract.CommonDataKinds.Email.CONTACT_ID, contactId, ContactsContract.CommonDataKinds.Email.ADDRESS);
     }
 
 
     @SuppressLint("Range")
-    private static String getContactInfo(ContentResolver contentResolver, Uri uri, String selection, String contactId, String columnName) {
-        Cursor phoneCursor = contentResolver.query(uri, null, selection + " = ?", new String[]{contactId}, null);
+    private static String getContactInfo(ContentResolver contentResolver, Uri uri, String selection, Integer contactId, String columnName) {
+        Cursor phoneCursor = contentResolver.query(uri, null, selection + " = ?", new String[]{contactId.toString()}, null);
         String info = "";
         if (phoneCursor != null && phoneCursor.moveToFirst()) {
             info = phoneCursor.getString(phoneCursor.getColumnIndex(columnName));
@@ -82,7 +82,7 @@ public class ContactFetcher {
     }
 
     @SuppressLint("Range")
-    public static String getContactTelegramId(ContentResolver contentResolver, String contactId) {
+    public static String getContactTelegramId(ContentResolver contentResolver, Integer contactId) {
         String telegramId = null;
         Cursor cursor = null;
 
@@ -92,7 +92,7 @@ public class ContactFetcher {
                     null,
                     ContactsContract.Data.CONTACT_ID + " = ? AND " +
                             ContactsContract.Data.MIMETYPE + " = ?",
-                           new String[]{contactId, "vnd.android.cursor.item/vnd.org.telegram.messenger.android.profile"},
+                           new String[]{contactId.toString(), "vnd.android.cursor.item/vnd.org.telegram.messenger.android.profile"},
                     null
             );
 
@@ -109,7 +109,7 @@ public class ContactFetcher {
     }
 
     @SuppressLint("Range")
-    public static String getContactWhatsappId(ContentResolver contentResolver, String contactId) {
+    public static String getContactWhatsappId(ContentResolver contentResolver, Integer contactId) {
         String whatsappId = null;
         Cursor cursor = null;
 
@@ -119,7 +119,7 @@ public class ContactFetcher {
                     null,
                     ContactsContract.Data.CONTACT_ID + " = ? AND " +
                             ContactsContract.Data.MIMETYPE + " = ?",
-                    new String[]{contactId, "vnd.android.cursor.item/vnd.com.whatsapp.profile"},
+                    new String[]{contactId.toString(), "vnd.android.cursor.item/vnd.com.whatsapp.profile"},
                     null
             );
 
