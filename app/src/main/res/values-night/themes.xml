@@ -8,7 +8,6 @@
         <item name="android:buttonStyle">@style/MyButtonStyle</item>
         <item name="buttonStyle">@style/MyButtonStyle</item>
         <item name="windowActionModeOverlay">true</item>
-
         <item name="android:statusBarColor" tools:ignore="NewApi">@color/colorPrimary</item>
         <item name="android:fontFamily">@font/shabnam_regular</item>
         <item name="android:navigationBarColor" tools:ignore="NewApi">@color/colorPrimary</item>
@@ -35,12 +34,9 @@
         <item name="fontFamily">@font/shabnam_regular</item>
         <item name="android:fontFamily">@font/shabnam_regular</item>
 
-
     </style>
     <style name="AppTheme_MaterialAlertDialog.MaterialComponents.Title.Text" parent="@style/MaterialAlertDialog.MaterialComponents.Title.Text">
         <item name="android:textAppearance">@style/AppTheme_TextAppearance.MaterialComponents.Subtitle1</item>
-
-
     </style>
 
     <style name="AppTheme_TextAppearance.MaterialComponents.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">

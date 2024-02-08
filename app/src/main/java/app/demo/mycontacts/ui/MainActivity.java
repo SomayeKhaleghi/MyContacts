@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.pm.PackageManager;
@@ -17,12 +16,8 @@ import java.util.Objects;
 import app.demo.mycontacts.R;
 import app.demo.mycontacts.model.Contact;
 import app.demo.mycontacts.utils.Constants;
-import app.demo.mycontacts.viewmodel.ContactViewModel;
 
-public class MainActivity extends AppCompatActivity  implements   ContactAdapter.ItemEventListener {
-
-    private ContactViewModel contactViewModel;
-
+public class MainActivity extends AppCompatActivity  implements  ContactAdapter.ItemEventListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +43,6 @@ public class MainActivity extends AppCompatActivity  implements   ContactAdapter
     }
 
     private void loadPhoneContacts() {
-        contactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new ContactListFragment())
@@ -80,10 +74,7 @@ public class MainActivity extends AppCompatActivity  implements   ContactAdapter
 
         if (backStackEntryCount > 0) {
             String topFragmentTag = fragmentManager.getBackStackEntryAt(backStackEntryCount - 1).getName();
-            if (Objects.equals(topFragmentTag, ContactDetailFragment.class.getSimpleName())) {
-                super.onBackPressed(); // Exit the app
-                return;
-            } else {
+            if (!Objects.equals(topFragmentTag, ContactDetailFragment.class.getSimpleName())) {
                 showExitDialog();
                 return;
             }

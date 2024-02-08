@@ -8,13 +8,14 @@
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:padding="@dimen/_4ssp"
         android:layout_margin="@dimen/_4ssp"
-        tools:targetApi="m">
+        tools:targetApi="m"
+        tools:ignore="UnusedAttribute">
 
     <ImageView
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
+        android:layout_marginStart="@dimen/_8ssp"
         android:layout_marginEnd="@dimen/_8ssp"
-        android:layout_marginRight="@dimen/_8ssp"
         android:contentDescription="@string/contact"
         android:gravity="center_vertical"
         android:scaleType="centerCrop"
@@ -24,7 +25,6 @@
         android:id="@+id/textViewContactName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="saasdas"
         android:gravity="center_vertical"
         android:fontFamily="@font/shabnam_regular"
         android:textSize="@dimen/_14ssp" />
