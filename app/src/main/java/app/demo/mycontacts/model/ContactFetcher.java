@@ -132,6 +132,11 @@ public class ContactFetcher {
             }
         }
 
+        assert whatsappId != null;
+        if (whatsappId.contains("@")) {
+            String[] parts = whatsappId.split("@");
+            return parts[0];
+        }
         return whatsappId;
     }
 }

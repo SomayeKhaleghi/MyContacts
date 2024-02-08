@@ -25,8 +25,6 @@
     </style>
     <style name="AppTheme_ThemeOverlay.MaterialComponents.MaterialAlertDialog" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="materialAlertDialogTitleTextStyle">@style/AppTheme_MaterialAlertDialog.MaterialComponents.Title.Text</item>
-
-
         <item name="materialAlertDialogBodyTextStyle">@style/AppTheme_MaterialAlertDialog.MaterialComponents.NormalText</item>
 
     </style>
@@ -35,12 +33,9 @@
         <item name="fontFamily">@font/shabnam_regular</item>
         <item name="android:fontFamily">@font/shabnam_regular</item>
 
-
     </style>
     <style name="AppTheme_MaterialAlertDialog.MaterialComponents.Title.Text" parent="@style/MaterialAlertDialog.MaterialComponents.Title.Text">
         <item name="android:textAppearance">@style/AppTheme_TextAppearance.MaterialComponents.Subtitle1</item>
-
-
     </style>
 
     <style name="AppTheme_TextAppearance.MaterialComponents.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
