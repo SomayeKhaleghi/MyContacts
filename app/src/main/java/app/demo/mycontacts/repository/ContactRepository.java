@@ -8,6 +8,7 @@ import java.util.List;
 import app.demo.mycontacts.dao.ContactDao;
 import app.demo.mycontacts.database.AppDatabase;
 import app.demo.mycontacts.model.Contact;
+import app.demo.mycontacts.model.ContactDetail;
 import app.demo.mycontacts.model.ContactFetcher;
 
 public class ContactRepository {
@@ -30,8 +31,8 @@ public List<Contact> getUniqueContacts() {
 
 
 
-public List<Contact> getUniqueContact(String id) {
-    return ContactFetcher.fetchUniqueContact(context, id);
+public ContactDetail getContactDetail(Contact contact) {
+    return ContactFetcher.fetchUniqueContact(context, contact);
 }
 
 

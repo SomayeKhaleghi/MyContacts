@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity  implements   ContactAdapter
 
         if (savedInstanceState == null) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS},Constants.PERMISSION_REQUEST_READ_CONTACTS);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, Constants.PERMISSION_REQUEST_READ_CONTACTS);
             } else {
                 loadPhoneContacts();
             }
@@ -58,8 +58,6 @@ public class MainActivity extends AppCompatActivity  implements   ContactAdapter
         Bundle args = new Bundle();
         args.putString(Constants.ID, contact.getId());
         args.putString(Constants.NAME, contact.getName());
-        // args.putString(Constants.EMAIL_ADDRESS, contact.getEmail());
-        //args.putString(Constants.PHONE_NUMBER, contact.getPhoneNumber());
         fragment.setArguments(args);
 
         getSupportFragmentManager().beginTransaction()
@@ -67,4 +65,5 @@ public class MainActivity extends AppCompatActivity  implements   ContactAdapter
                 .addToBackStack(null)
                 .commit();
     }
+
 }

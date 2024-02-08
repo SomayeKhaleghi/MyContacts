@@ -9,7 +9,7 @@ import app.demo.mycontacts.repository.ContactRepository;
 public class ContactViewModel extends AndroidViewModel {
 private ContactManager contactManager;
 private ContactRepository contactRepository;
-private LiveData<List<Contact>> allContacts;
+    private LiveData<List<Contact>> allContacts;
 
 public ContactViewModel(@NonNull Application application){
     super(application);

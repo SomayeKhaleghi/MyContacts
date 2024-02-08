@@ -7,19 +7,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"    android:gravity="center_vertical"
         android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:padding="@dimen/_8ssp"
-        android:layout_margin="@dimen/_8ssp"
+        android:padding="@dimen/_4ssp"
+        android:layout_margin="@dimen/_4ssp"
         tools:targetApi="m">
 
     <ImageView
-        android:layout_width="@dimen/_48ssp"
-        android:layout_height="@dimen/_48ssp"
-        android:layout_marginEnd="@dimen/_12ssp"
-        android:layout_marginRight="@dimen/_12ssp"
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginEnd="@dimen/_8ssp"
+        android:layout_marginRight="@dimen/_8ssp"
         android:contentDescription="@string/contact"
         android:gravity="center_vertical"
         android:scaleType="centerCrop"
-        android:src="@drawable/contact" />
+        android:src="@drawable/ic_contact" />
 
     <TextView
         android:id="@+id/textViewContactName"
@@ -27,5 +27,6 @@
         android:layout_height="wrap_content"
         android:text="saasdas"
         android:gravity="center_vertical"
-        android:textSize="@dimen/_18ssp" />
+        android:fontFamily="@font/shabnam_regular"
+        android:textSize="@dimen/_14ssp" />
     </LinearLayout>
