@@ -7,8 +7,8 @@ import java.util.List;
 import app.demo.mycontacts.model.Contact;
 import app.demo.mycontacts.repository.ContactRepository;
 public class ContactViewModel extends AndroidViewModel {
-    private ContactManager contactManager;
-    private ContactRepository contactRepository;
+    private final ContactManager contactManager;
+    private final ContactRepository contactRepository;
     private LiveData<List<Contact>> allContacts;
 
     public ContactViewModel(@NonNull Application application) {

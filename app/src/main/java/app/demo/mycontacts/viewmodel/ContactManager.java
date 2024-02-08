@@ -6,8 +6,8 @@ import app.demo.mycontacts.model.Contact;
 import app.demo.mycontacts.repository.ContactRepository;
 
 public class ContactManager {
-    private ContactRepository contactRepository;
-    private HashMap<Integer, Contact> contactHashMap;
+    private final ContactRepository contactRepository;
+    private final HashMap<Integer, Contact> contactHashMap;
 
     public ContactManager(ContactRepository contactRepository) {
         contactHashMap = new HashMap<>();

@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider;
 import app.demo.mycontacts.model.Contact;
 
 public class ContactDetailViewModelFactory implements ViewModelProvider.Factory {
-
     private final Contact contact;
     private final Application application;
 

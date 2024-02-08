@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel;
 import app.demo.mycontacts.model.Contact;
 import app.demo.mycontacts.model.ContactDetail;
 import app.demo.mycontacts.repository.ContactRepository;
-
 public class ContactDetailViewModel extends ViewModel {
     private final LiveData<ContactDetail> contactDetailLiveData = new MutableLiveData<>();
 
