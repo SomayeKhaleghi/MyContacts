@@ -4,12 +4,21 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
+import android.os.Process;
 import android.widget.Toast;
+
+import java.util.Objects;
+
 import app.demo.mycontacts.R;
 import app.demo.mycontacts.model.Contact;
 import app.demo.mycontacts.utils.Constants;
@@ -55,7 +64,7 @@ public class MainActivity extends AppCompatActivity  implements   ContactAdapter
 
     @Override
     public void onItemClick(Contact contact, int position) {
-
+        backPressedOnce = true;
         ContactDetailFragment fragment = new ContactDetailFragment();
 
         Bundle bundle = new Bundle();
@@ -65,8 +74,67 @@ public class MainActivity extends AppCompatActivity  implements   ContactAdapter
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
+                .addToBackStack(ContactDetailFragment.class.getSimpleName())
                 .commit();
+    }
+
+    boolean backPressedOnce = false;
+    @Override
+    public void onBackPressed() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        int backStackEntryCount = fragmentManager.getBackStackEntryCount();
+
+        if (backStackEntryCount > 0) {
+            String topFragmentTag = fragmentManager.getBackStackEntryAt(backStackEntryCount - 1).getName();
+
+            if (Objects.equals(topFragmentTag, ContactDetailFragment.class.getSimpleName())) {
+                super.onBackPressed(); // Exit the app
+                return;
+            }
+            else
+            {
+               /* if (backPressedOnce) {
+                    super.onBackPressed(); // Exit the app
+                    return;
+                }
+
+                backPressedOnce = false;*/
+                /*Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+
+                // Reset the flag after a short delay (e.g., 2 seconds)
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        backPressedOnce = false;
+                    }
+                }, 2000);*/
+                showExitDialog();
+
+                return;
+            }
+        }
+
+        super.onBackPressed();
+    }
+
+
+    private   void showExitDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.exit_app)
+                .setMessage(R.string.dialog_text)
+                .setPositiveButton(R.string.yes, (dialog, which) -> {
+                    finish();
+                    finishAffinity();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        finishAndRemoveTask();
+
+                    }
+                    Process.killProcess(Process.myPid());
+                })
+                .setNegativeButton(R.string.no, (dialog, which) -> {
+                    backPressedOnce = false; // Reset the flag
+                })
+                .show();
     }
 
 }

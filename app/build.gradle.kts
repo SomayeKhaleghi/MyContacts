@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "app.demo.mycontacts"
-        minSdk = 18
+        minSdk = 17
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"

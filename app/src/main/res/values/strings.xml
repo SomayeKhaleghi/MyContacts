@@ -7,4 +7,10 @@
     <string name="whatsapp">Whatsapp</string>
     <string name="contact">contact</string>
     <string name="telegram">telegram</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="exit_app">Exit App</string>
+    <string name="dialog_text">Are you sure you want to exit?</string>
+
+
 </resources>
