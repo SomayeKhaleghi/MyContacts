@@ -55,5 +55,4 @@ public class ContactDetail {
     public ContactDetail(@NonNull Contact contact) {
         this.contact = contact;
     }
-
 }

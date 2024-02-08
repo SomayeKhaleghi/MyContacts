@@ -4,12 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
 @Entity(tableName = "contact")
 public class Contact {
     @PrimaryKey
     @NonNull
-    private Integer id ;
+    private Integer id;
 
     @ColumnInfo(name = "name")
     @NonNull
@@ -28,6 +27,7 @@ public class Contact {
     public String getName() {
         return name;
     }
+
     public void setName(@NonNull String name) {
         this.name = name;
     }

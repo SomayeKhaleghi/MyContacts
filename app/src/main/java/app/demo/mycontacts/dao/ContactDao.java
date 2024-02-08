@@ -8,19 +8,18 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 import java.util.List;
-
 import app.demo.mycontacts.model.Contact;
 @Dao
 public interface ContactDao {
-@Insert(onConflict = OnConflictStrategy.REPLACE)
-void insert(Contact contact);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(Contact contact);
 
-@Update
-void updateContact(Contact contact);
+    @Update
+    void updateContact(Contact contact);
 
-@Query("SELECT * FROM contact ORDER BY name;")
-LiveData<List<Contact>> getAllContacts();
+    @Query("SELECT * FROM contact ORDER BY name;")
+    LiveData<List<Contact>> getAllContacts();
 
-@Delete
-void deleteContact(Contact contact);
+    @Delete
+    void deleteContact(Contact contact);
 }

@@ -1,20 +1,15 @@
 package app.demo.mycontacts.ui;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import app.demo.mycontacts.R;
 import app.demo.mycontacts.model.Contact;
-import app.demo.mycontacts.model.ContactDetail;
 import app.demo.mycontacts.utils.Constants;
 import app.demo.mycontacts.viewmodel.ContactDetailViewModel;
 import app.demo.mycontacts.viewmodel.ContactDetailViewModelFactory;
@@ -48,7 +43,7 @@ public class ContactDetailFragment extends Fragment {
         textViewTelegram = view.findViewById(R.id.textViewTelegram);
 
         Bundle arguments = getArguments();
-        if (arguments == null || !arguments.containsKey(Constants.ID)|| !arguments.containsKey(Constants.NAME)) {
+        if (arguments == null || !arguments.containsKey(Constants.ID) || !arguments.containsKey(Constants.NAME)) {
             return view;
         }
 
@@ -61,7 +56,7 @@ public class ContactDetailFragment extends Fragment {
         contactDetailViewModel = new ViewModelProvider((ViewModelStoreOwner) this, factory).get(ContactDetailViewModel.class);
         contactDetailViewModel.getSelectedContact().observe(getViewLifecycleOwner(), contactDetail -> {
             textViewName.setText(contactDetail.getContact().getName());
-            textViewPhoneNumber.setText( contactDetail.getPhoneNumber());
+            textViewPhoneNumber.setText(contactDetail.getPhoneNumber());
             textViewEmailAddress.setText(contactDetail.getEmail());
             textViewWhatsapp.setText(contactDetail.getWhatsApp());
             textViewTelegram.setText(contactDetail.getTelegram());

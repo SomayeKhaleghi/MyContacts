@@ -6,7 +6,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
-import android.util.Log;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -69,7 +68,6 @@ public class ContactFetcher {
         return getContactInfo(contentResolver, ContactsContract.CommonDataKinds.Email.CONTENT_URI, ContactsContract.CommonDataKinds.Email.CONTACT_ID, contactId, ContactsContract.CommonDataKinds.Email.ADDRESS);
     }
 
-
     @SuppressLint("Range")
     private static String getContactInfo(ContentResolver contentResolver, Uri uri, String selection, Integer contactId, String columnName) {
         Cursor phoneCursor = contentResolver.query(uri, null, selection + " = ?", new String[]{contactId.toString()}, null);
@@ -92,7 +90,7 @@ public class ContactFetcher {
                     null,
                     ContactsContract.Data.CONTACT_ID + " = ? AND " +
                             ContactsContract.Data.MIMETYPE + " = ?",
-                           new String[]{contactId.toString(), "vnd.android.cursor.item/vnd.org.telegram.messenger.android.profile"},
+                    new String[]{contactId.toString(), "vnd.android.cursor.item/vnd.org.telegram.messenger.android.profile"},
                     null
             );
 
@@ -132,7 +130,7 @@ public class ContactFetcher {
             }
         }
 
-        if (whatsappId!=null && whatsappId.length()>0 && whatsappId.contains("@")) {
+        if (whatsappId != null && whatsappId.length() > 0 && whatsappId.contains("@")) {
             String[] parts = whatsappId.split("@");
             return parts[0];
         }
