@@ -54,7 +54,7 @@
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
             android:text="@string/phone_number"
-            android:fontFamily="@font/shabnam_bold"
+            android:fontFamily="@font/shabnam_regular"
             android:textSize="@dimen/_12ssp"/>
     </LinearLayout>
 
@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
 
         android:gravity="center_vertical"
-        android:fontFamily="@font/shabnam_bold"
+        android:fontFamily="@font/shabnam_regular"
         android:text="@string/email_address"
         android:textSize="@dimen/_12ssp" />
     </LinearLayout>
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
 
             android:gravity="center_vertical"
-            android:fontFamily="@font/shabnam_bold"
+            android:fontFamily="@font/shabnam_regular"
             android:text="@string/email_address"
             android:textSize="@dimen/_12ssp" />
     </LinearLayout>
@@ -139,7 +139,7 @@
             android:layout_height="wrap_content"
 
             android:gravity="center_vertical"
-            android:fontFamily="@font/shabnam_bold"
+            android:fontFamily="@font/shabnam_regular"
             android:text="@string/email_address"
             android:textSize="@dimen/_12ssp" />
     </LinearLayout>
