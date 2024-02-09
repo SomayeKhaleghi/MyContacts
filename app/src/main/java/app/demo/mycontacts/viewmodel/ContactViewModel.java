@@ -1,5 +1,7 @@
 package app.demo.mycontacts.viewmodel;
 import android.app.Application;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -16,9 +18,12 @@ public class ContactViewModel extends AndroidViewModel {
         contactRepository = new ContactRepository(application);
         allContacts = contactRepository.getAllContacts();
         contactManager = new ContactManager(contactRepository);
+        //fetchUniqueContacts();
     }
 
     public void fetchUniqueContacts() {
+
+        Log.d("somaye", "ContactViewModel, fetchUniqueContacts");
         List<Contact> uniqueContacts = contactRepository.getUniqueContacts();
         updateContactsFromDevice(uniqueContacts);
     }

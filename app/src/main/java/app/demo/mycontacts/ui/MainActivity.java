@@ -5,22 +5,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
+
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.os.Process;
+import android.util.Log;
 import android.widget.Toast;
 import java.util.Objects;
 import app.demo.mycontacts.R;
 import app.demo.mycontacts.model.Contact;
 import app.demo.mycontacts.utils.Constants;
+import app.demo.mycontacts.viewmodel.ContactViewModel;
 
 public class MainActivity extends AppCompatActivity  implements  ContactAdapter.ItemEventListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
@@ -42,14 +48,7 @@ public class MainActivity extends AppCompatActivity  implements  ContactAdapter.
         }
     }
 
-    private void loadPhoneContacts() {
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, new ContactListFragment())
-                .addToBackStack(null)
-                .setReorderingAllowed(true)
-                .commit();
-    }
 
     @Override
     public void onItemClick(Contact contact, int position) {
@@ -99,5 +98,48 @@ public class MainActivity extends AppCompatActivity  implements  ContactAdapter.
                 .setNegativeButton(R.string.no, (dialog, which) -> {
                 })
                 .show();
+    }
+
+    boolean onRestartFetched = false;
+    private ContactViewModel contactViewModel;
+
+    private void loadPhoneContacts() {
+
+        if (contactViewModel == null) {
+            contactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
+        }
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new ContactListFragment())
+                .addToBackStack(null)
+                .setReorderingAllowed(true)
+                .commit();
+    }
+
+    @Override
+    protected void onResume() {
+
+        if (contactViewModel == null) {
+            Log.d("somaye", "MainActivity, onResume, new ViewModelProvider");
+            contactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
+        } else {
+            if (onRestartFetched)
+                onRestartFetched = false;
+            else {
+                Log.d("somaye", "MainActivity, onResume, fetch ");
+                contactViewModel.fetchUniqueContacts();
+            }
+        }
+        super.onResume();
+    }
+    @Override
+    protected void onRestart() {
+        if (contactViewModel != null) {
+            onRestartFetched = true;
+            Log.d("somaye", "MainActivity, onRestart, fetch ");
+            contactViewModel.fetchUniqueContacts();
+        }
+
+        super.onRestart();
     }
 }
