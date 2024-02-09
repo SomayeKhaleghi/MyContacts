@@ -12,7 +12,6 @@ import android.app.AlertDialog;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.os.Process;
 import android.util.Log;
 import android.widget.Toast;
