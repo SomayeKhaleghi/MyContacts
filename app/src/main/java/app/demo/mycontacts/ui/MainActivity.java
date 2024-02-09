@@ -6,14 +6,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Process;
-import android.util.Log;
 import android.widget.Toast;
 import java.util.Objects;
 import app.demo.mycontacts.R;
@@ -46,7 +44,6 @@ public class MainActivity extends AppCompatActivity  implements  ContactAdapter.
             Toast.makeText(this, "Permission denied. Unable to fetch contacts.", Toast.LENGTH_SHORT).show();
         }
     }
-
 
 
     @Override
@@ -119,23 +116,22 @@ public class MainActivity extends AppCompatActivity  implements  ContactAdapter.
     protected void onResume() {
 
         if (contactViewModel == null) {
-            Log.d("somaye", "MainActivity, onResume, new ViewModelProvider");
             contactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
         } else {
             if (onRestartFetched)
                 onRestartFetched = false;
             else {
-                Log.d("somaye", "MainActivity, onResume, fetch ");
                 contactViewModel.fetchUniqueContacts();
             }
         }
         super.onResume();
     }
+
     @Override
     protected void onRestart() {
-        if (contactViewModel != null) {
+
+        if (contactViewModel == null) {
             onRestartFetched = true;
-            Log.d("somaye", "MainActivity, onRestart, fetch ");
             contactViewModel.fetchUniqueContacts();
         }
 

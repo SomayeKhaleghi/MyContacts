@@ -1,7 +1,6 @@
 package app.demo.mycontacts.viewmodel;
-import android.app.Application;
-import android.util.Log;
 
+import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -22,18 +21,18 @@ public class ContactViewModel extends AndroidViewModel {
     }
 
     public void fetchUniqueContacts() {
-
-        Log.d("somaye", "ContactViewModel, fetchUniqueContacts");
         List<Contact> uniqueContacts = contactRepository.getUniqueContacts();
         updateContactsFromDevice(uniqueContacts);
     }
 
     private void updateContactsFromDevice(List<Contact> deviceContacts) {
         contactManager.updateHashMap(deviceContacts);
+
         if (allContacts != null && allContacts.getValue() != null && allContacts.getValue().size() > 0)
             contactManager.compareAndUpdateDatabase(allContacts.getValue());
 
         contactManager.addHashMapContactIntoDatabase();
+        //allContacts = contactRepository.getAllContacts();//???????????!!!!!!!!!!!
     }
 
     public LiveData<List<Contact>> getAllContacts() {

@@ -1,5 +1,7 @@
 package app.demo.mycontacts.viewmodel;
 
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.List;
 import app.demo.mycontacts.model.Contact;
